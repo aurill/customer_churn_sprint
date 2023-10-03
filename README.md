@@ -15,7 +15,7 @@ We will discuss the machine-learning techniques and models that were used in the
 
 - **Ridge Classifier with Grid Search**: Ridge classifiers are suitable for binary classification problems like churn prediction. They can handle features that may be correlated, which is common in customer data. By using Ridge Classifier, you account for potential correlations among customer attributes, helping to make accurate churn predictions.
 
-+ **LightGBM Classifier with Bayesian Optimization**: LightGBM is a gradient-boosting framework that excels in speed and efficiency, making it an excellent choice for handling large datasets, such as those encountered in telecom customer churn prediction. It's capable of handling categorical features efficiently and can capture complex relationships between features, making it well-suited for identifying subtle churn patterns. Its high accuracy and speed make LightGBM a valuable addition to your set of classifiers.
++ **LightGBM Classifier with Bayesian Optimization**: LightGBM is a gradient-boosting framework that excels in speed and efficiency, making it an excellent choice for handling large datasets, such as those encountered in telecom customer churn prediction. It's capable of handling categorical features efficiently and can capture complex relationships between features, making it well-suited for identifying subtle churn patterns. Its high accuracy and speed make LightGBM a valuable addition to the set of classifiers.
 
 ## **Defining a Churn Event**.
 
@@ -23,11 +23,11 @@ A Churn event could manifest in a variety of factors. This could stem from custo
 
 ## **The Data Collection Process**
 
-After we have defined a churn event, We will obtain data on these factors as well as other factors. These include the customer's **ID**- a unique identifier for a sprint customer, their **Age**, the **Contract_Type** which varied from Month to Month or Annual, **Monthly_Charges** - for their sprint services,  **Tenure** - the number of years they have been at Sprint,  **Total_Charges** - which was a product of the Monthly Charges and the Tenure, Phone_Service - which measures if the customer has phone service or not, **Multiple_Lines** - if they have multiple phone lines on the sprint network, **Online_Backup** of their sprint service data, **Active_Member** - a status to indicate whether or not they are still active on the sprint network and lastly, **Customer_Complaints** - which measures whether or not a customer has complained about a sprint product or service in the past. 
+After we have defined a churn event, we will obtain data on these factors as well as other factors. These include the customer's **ID**- a unique identifier for a sprint customer, their **Age**, the **Contract_Type** which varied from Month to Month to Annual, **Monthly_Charges** - for their sprint services charges,  **Tenure** - the number of years they have been with sprint,  **Total_Charges** - which was a product of the Monthly Charges and the Tenure, Phone_Service - which measures if the customer has phone service or not, **Multiple_Lines** - if they have multiple phone lines on the sprint network, **Online_Backup** of their sprint service data, **Active_Member** - a status to indicate whether or not they are still active on the sprint network and lastly, **Customer_Complaints** - which measures whether or not a customer has complained about a sprint product or service in the past. 
 
 ## **Data Preprocessing** 
 
-After the Churn data has been compiled, Data Preprocessing was done on it. This involved using Google Sheets to remove duplicate rows, dropping rows that had missing Customer IDs, missing customer complaints, active member data age, and other missing data. As for the missing Monthly Charges data, Tenure, and Total Charges data that were missing, imputation was done by using the formula: *Total_Charges = Monthly_Charges * Tenure* so as to preserve the number of data in the dataset. Additionally, the columns Contract Type, Phone Service, Multiple_Lines, Online_Backup, Active_Member, Churn, and Customer_Complaints contained 'Yes' and 'No' entries as well as 'True' and 'False' entries. *Google Excel's Find and Replace* feature was used for the binary encoding process by converting these categorical features into numerical representations (0 and 1). 
+After the Churn data had been compiled, the data preprocessing work was executed. This involved using Google Sheets to remove duplicate rows, dropping rows that had missing Customer IDs, missing customer complaints, active member data age, and other missing data. As for the missing Monthly Charges data, Tenure, and Total Charges data that were missing, imputation was done by using the formula: *Total_Charges = Monthly_Charges * Tenure* so as to preserve the number of data in the dataset. Additionally, the columns Contract Type, Phone Service, Multiple_Lines, Online_Backup, Active_Member, Churn, and Customer_Complaints contained 'Yes' and 'No' entries as well as 'True' and 'False' entries. *Google Excel's Find and Replace* feature was used for the binary encoding process by converting these categorical features into numerical representations (0 and 1). 
 
 _For the Data Loading process in Google Colab:_
 
@@ -69,12 +69,14 @@ The results of this code provided all the essential data needed for the _Feature
 The columns **Tenure**, **Active_Member** and **Customer_Complains** all showed positive correlation with **Churn**. **Tenure** had a correlation of _0.272682_, while **Active_Member** and **Customer_Complains** had a correlation of _0.941265_. These values indicate that customers who are active members and those who have made complaints in the past are more likely to churn. Since these features are potentially important to the model, they were added to a list named **features** and they were retained in the modeling and machine learning process. 
 
 ```python
-features = ['Tenure', 'Customer Complains', 'Active_Member']
+features = ['Tenure', 'Customer Complains', 'Active_Member'] # Adding all the columns to a list called features that showed a positive correlation with churn in the data.
 ```
 
 ## **Model Selection**
 
-As discussed before, various machine learning algorithms were used for the Model selection process. Firstly, the dataset was split into train/test parts: 
+As discussed before, various machine learning algorithms were used for the Model selection process. 
+
+The dataset was split into train/test parts: 
 
 ```python
 X_train, X_test, y_train, y_test = train_test_split(data[features], data['Churn'], test_size = 0.25, random_state = 42)
@@ -120,7 +122,7 @@ print(f'Ridge Classifier Precision Score : {precision:.3f} %')
 print(f'Ridge Classifier roc auc Score : {roc_auc:.3f} %')
 ```
 
-**Accuracy Score**: The accuracy score indicates the proportion of correctly predicted instances in the test dataset. In this case, the Ridge Classifier achieved an accuracy of approximately 96.203%, which means it correctly predicted about 96.203% of the churn outcomes in your test data.
+**Accuracy Score**: The accuracy score indicates the proportion of correctly predicted instances in the test dataset. In this case, the Ridge Classifier achieved an accuracy of approximately 96.203%, which means it correctly predicted about 96.203% of the churn outcomes in the test data.
 
 **Recall Score**: Recall, also known as sensitivity or true positive rate, measures the proportion of actual positive cases (churned customers) that were correctly predicted as positive by the model. Here, the Ridge Classifier achieved a recall of approximately 99.275%, indicating that it correctly identified about 99.275% of the customers who actually churned.
 
@@ -159,7 +161,7 @@ opt = BayesSearchCV(
     lgb_classifier,
     param_space,
     n_iter=50,  # Number of optimization iterations
-    scoring='roc_auc',  # Choose an appropriate metric for your problem
+    scoring='roc_auc',  # Choose an appropriate metric for the problem
     cv=5,  # Number of cross-validation folds
     n_jobs=-1  # Use all available CPU cores
 )
@@ -185,12 +187,12 @@ print(f'LightGBM Precision Score: {precision:.3f} %')
 print(f'LightGBM ROC AUC Score: {roc_auc:.3f} %')
 ```
 
-**Accuracy Score**: The accuracy score indicates the proportion of correctly predicted instances in the test dataset. In this case, the Ridge Classifier achieved an accuracy of approximately 96.203%, which means it correctly predicted about 96.203% of the churn outcomes in your test data.
+**Accuracy Score**: The accuracy score indicates the proportion of correctly predicted instances in the test dataset. In this case, the Ridge Classifier achieved an accuracy of approximately 96.203%, which means it correctly predicted about 96.203% of the churn outcomes in the test data.
 
 **Recall Score**: Recall, also known as sensitivity or true positive rate, measures the proportion of actual positive cases (churned customers) that were correctly predicted as positive by the model. Here, the Ridge Classifier achieved a recall of approximately 99.275%, indicating that it correctly identified about 99.275% of the customers who actually churned.
 
 **Precision Score**: Precision measures the proportion of true positive predictions out of all positive predictions made by the model. In this case, the Ridge Classifier achieved a precision of approximately 94.483%. This means that out of all the customers predicted as churning by the model, about 94.483% of them actually did churn.
 
-**ROC AUC Score**: The ROC AUC (Receiver Operating Characteristic Area Under the Curve) score is a measure of the model's ability to distinguish between positive and negative classes. It considers both the true positive rate (recall) and false positive rate. The Ridge Classifier achieved an ROC AUC score of approximately 94.708%, indicating that the model has a good ability to discriminate between churn and non-churn customers.
+**ROC AUC Score**: The ROC AUC (Receiver Operating Characteristic Area Under the Curve) score is a measure of the model's ability to distinguish between positive and negative classes. The Ridge Classifier achieved an ROC AUC score of approximately 94.708%, indicating that the model has a good ability to discriminate between churn and non-churn customers.
 
 _Similarly to the Ridge Classifier algorithm, these scores indicate that this Machine learning algorithm performed well in predicting customer churn with high accuracy, recall, precision, and ROC AUC values._
