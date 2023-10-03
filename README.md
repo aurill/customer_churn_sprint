@@ -15,11 +15,11 @@ We will discuss the machine-learning techniques and models that were used in the
 
 - **Ridge Classifier with Grid Search**: Ridge classifiers are suitable for binary classification problems like churn prediction. They can handle features that may be correlated, which is common in customer data. By using Ridge Classifier, you account for potential correlations among customer attributes, helping to make accurate churn predictions.
 
-+ **LightGBM Classifier with Bayesian Optimization**: LightGBM is a gradient boosting framework that excels in speed and efficiency, making it an excellent choice for handling large datasets, such as those encountered in telecom customer churn prediction. It's capable of handling categorical features efficiently and can capture complex relationships between features, making it well-suited for identifying subtle churn patterns. Its high accuracy and speed make LightGBM a valuable addition to your set of classifiers.
++ **LightGBM Classifier with Bayesian Optimization**: LightGBM is a gradient-boosting framework that excels in speed and efficiency, making it an excellent choice for handling large datasets, such as those encountered in telecom customer churn prediction. It's capable of handling categorical features efficiently and can capture complex relationships between features, making it well-suited for identifying subtle churn patterns. Its high accuracy and speed make LightGBM a valuable addition to your set of classifiers.
 
 ## **Defining a Churn Event**.
 
-A Churn event could manifest in a variety of factors. This could stem from customer complaints where a High number of customer complaints may be indicative of underlying issues with service quality, billing, or customer support, leading to dissatisfaction and churn. Another likelihood could arise if whether or not a customer is an active member - as active members, who actively engage with Sprint's services and promotions, are more likely to stay. Inactive members may not see the value in continuing with Sprint. Our aim in this Machine Learning Project is to predicti the specific feautures that correspond to sprint customer churn rates. 
+A Churn event could manifest in a variety of factors. This could stem from customer complaints where a High number of customer complaints may be indicative of underlying issues with service quality, billing, or customer support, leading to dissatisfaction and churn. Another likelihood could arise if whether or not a customer is an active member - as active members, who actively engage with Sprint's services and promotions, are more likely to stay. Inactive members may not see the value in continuing with Sprint. Our aim in this Machine Learning Project is to predict the specific features that correspond to sprint customer churn rates. 
 
 ## **The Data Collection Process**
 
@@ -27,27 +27,27 @@ After we have defined a churn event, We will obtain data on these factors as wel
 
 ## **Data Preprocessing** 
 
-After the Churn data has been complied, Data Preprocessing was done on it. This involved using Google Sheets to remove duplicate rows, dropping rows that had missing Customer IDs, missing customer complains, active member data age, and other missing data. As for the missing Monthly Charges data, Tenure, and Total Charges data that were missing, imputation was done by using the formula: *Total_Charges = Monthly_Charges * Tenure* so as to preserve the number of data in the dataset. Additionally, the columns Contract Type, Phone Service, Multiple_Lines, Online_Backup, Active_Member, Churn , and Customer_Complaints contained 'Yes' and 'No' entries as well as 'True' and 'False' entries. *Google Excel's Find and Replace* feature was used for the binary encoding process by converting these categorical features into numerical representations (0 and 1). 
+After the Churn data has been compiled, Data Preprocessing was done on it. This involved using Google Sheets to remove duplicate rows, dropping rows that had missing Customer IDs, missing customer complaints, active member data age, and other missing data. As for the missing Monthly Charges data, Tenure, and Total Charges data that were missing, imputation was done by using the formula: *Total_Charges = Monthly_Charges * Tenure* so as to preserve the number of data in the dataset. Additionally, the columns Contract Type, Phone Service, Multiple_Lines, Online_Backup, Active_Member, Churn, and Customer_Complaints contained 'Yes' and 'No' entries as well as 'True' and 'False' entries. *Google Excel's Find and Replace* feature was used for the binary encoding process by converting these categorical features into numerical representations (0 and 1). 
 
 _For the Data Loading process in Google Colab:_
 
 ```python
-# Installing the neccessary packages & importing libraries
+# Installing the necessary packages & importing libraries
 
-!pip install pyforest # a package thatlazy imports commonly used data science and machine learning libraries
+!pip install pyforest # a package that lazy imports commonly used data science and machine learning libraries
 import pyforest # importing the pyforest library
 
 drive.mount('/content/gdrive') # mounting Google Drive to the Colab environment. 
 data= pd.read_excel(r'/content/gdrive/My Drive/Customer Churn/Customer Churn Main.xlsx') # reading the dataset and storing it as a Pandas DataFrame named 'data'
 ```
-_For the binary encoding process, the following was preformed_ 
+_For the binary encoding process, the following was performed_ 
 
 1. Opening the dataset in Excel.
 2. Using the "Find and Replace" feature to convert categorical values to binary (0 and 1) as follows:
 
    - Opening the "Find" dialog (usually Ctrl + F).
    - Going to the "Replace" tab.
-   - Going into the "Find what" field, and entering the value to be replaced (e.g., "Yes", "No", "True", "False").
+   - Going into the "Find what" field, and enter the value to be replaced (e.g., "Yes", "No", "True", "False").
    - Entering "1" for True/ Yes values and "0" for False / No in the "Replace with" field.
    - Clicking "Replace All" to replace all instances.
    - Repeating this process for each column as needed.
@@ -61,7 +61,7 @@ To analyze the correlation between all the columns in the dataset and the churn 
 ```python
 data.corr()['Churn'].sort_values()
 ```
-The results of this code provided all the essential data needed for the _Feature Engineering & Selection process_. 
+The results of this code provided all the essential data needed for the _Feature Engineering and selection process_. 
 
 
 ## **Feature Engineering & Selection**
@@ -126,11 +126,11 @@ print(f'Ridge Classifier roc auc Score : {roc_auc:.3f} %')
 
 **Precision Score**: Precision measures the proportion of true positive predictions out of all positive predictions made by the model. In this case, the Ridge Classifier achieved a precision of approximately 94.483%. This means that out of all the customers predicted as churning by the model, about 94.483% of them actually did churn.
 
-**ROC AUC Score**: The ROC AUC (Receiver Operating Characteristic Area Under the Curve) score is a measure of the model's ability to distinguish between positive and negative classes. It considers both true positive rate (recall) and false positive rate. The Ridge Classifier achieved a ROC AUC score of approximately 94.675%, indicating that the model has a good ability to discriminate between churn and non-churn customers.
+**ROC AUC Score**: The ROC AUC (Receiver Operating Characteristic Area Under the Curve) score is a measure of the model's ability to distinguish between positive and negative classes. It considers both the true positive rate (recall) and false positive rate. The Ridge Classifier achieved an ROC AUC score of approximately 94.675%, indicating that the model has a good ability to discriminate between churn and non-churn customers.
 
-_These scores indicates that the Machine learning algorithm preformed well in predicting customer churn with high accuracy, recall, precision and ROC AUC values._
+_These scores indicate that the Machine learning algorithm performed well in predicting customer churn with high accuracy, recall, precision, and ROC AUC values._
 
-**Secondly**, in order to try capturing complex non-linear relationships within the data and for the purposes of cross validation, LightGBM algorithm was also implemented. This algorithm was optimized using Bayesian Optimization to search for the best set of hyperparameters for the classifier using a brute-force search method. 
+**Secondly**, in order to try capturing complex non-linear relationships within the data and for the purposes of cross-validation, LightGBM algorithm was also implemented. This algorithm was optimized using Bayesian Optimization to search for the best set of hyperparameters for the classifier using a brute-force search method. 
 
 ```python
 !pip install scikit-optimize
@@ -191,6 +191,6 @@ print(f'LightGBM ROC AUC Score: {roc_auc:.3f} %')
 
 **Precision Score**: Precision measures the proportion of true positive predictions out of all positive predictions made by the model. In this case, the Ridge Classifier achieved a precision of approximately 94.483%. This means that out of all the customers predicted as churning by the model, about 94.483% of them actually did churn.
 
-**ROC AUC Score**: The ROC AUC (Receiver Operating Characteristic Area Under the Curve) score is a measure of the model's ability to distinguish between positive and negative classes. It considers both true positive rate (recall) and false positive rate. The Ridge Classifier achieved a ROC AUC score of approximately 94.708%, indicating that the model has a good ability to discriminate between churn and non-churn customers.
+**ROC AUC Score**: The ROC AUC (Receiver Operating Characteristic Area Under the Curve) score is a measure of the model's ability to distinguish between positive and negative classes. It considers both the true positive rate (recall) and false positive rate. The Ridge Classifier achieved an ROC AUC score of approximately 94.708%, indicating that the model has a good ability to discriminate between churn and non-churn customers.
 
-_Similarly to Ridge Classifier algorithm, these scores indicates that this Machine learning algorithm preformed well in predicting customer churn with high accuracy, recall, precision and ROC AUC values._
+_Similarly to the Ridge Classifier algorithm, these scores indicate that this Machine learning algorithm performed well in predicting customer churn with high accuracy, recall, precision, and ROC AUC values._
