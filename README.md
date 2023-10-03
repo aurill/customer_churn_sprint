@@ -19,7 +19,7 @@ We will discuss the machine-learning techniques and models that were used in the
 
 ## **Defining a Churn Event**.
 
-A Churn event could manifest in a variety of factors. This could stem from customer complaints where a High number of customer complaints may be indicative of underlying issues with service quality, billing, or customer support, leading to dissatisfaction and churn. Another likelihood could arise if whether or not a customer is an active member - as active members, who actively engage with Sprint's services and promotions, are more likely to stay. Inactive members may not see the value in continuing with Sprint. Our aim in this Machine Learning Project is to predict the specific features that correspond to sprint customer churn rates. 
+A Churn event could manifest in a variety of factors. This could stem from customer complaints where a high number of customer complaints may be indicative of underlying issues with service quality, billing, or customer support, which can lead to dissatisfaction and ultimately customer churn. Another likelihood could arise if whether or not a customer is an active member - as active members, who engage with Sprint's services and promotions, are more likely to stay. Inactive members may not see the value in continuing with Sprint. Our aim in this Machine Learning Project is to predict the specific features that correspond to sprint customer churn rates. 
 
 ## **The Data Collection Process**
 
