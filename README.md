@@ -161,7 +161,7 @@ opt = BayesSearchCV(
     lgb_classifier,
     param_space,
     n_iter=50,  # Number of optimization iterations
-    scoring='roc_auc',  # Choose an appropriate metric for the problem
+    scoring='roc_auc',  # Choosing an appropriate metric for the problem
     cv=5,  # Number of cross-validation folds
     n_jobs=-1  # Use all available CPU cores
 )
