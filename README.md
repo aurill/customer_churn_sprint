@@ -164,7 +164,7 @@ opt = BayesSearchCV(
     n_iter=50,  # Number of optimization iterations
     scoring='roc_auc',  # Choosing an appropriate metric for the problem
     cv=5,  # Number of cross-validation folds
-    n_jobs=-1  # Use all available CPU cores
+    n_jobs=-1  # Using all available CPU cores
 )
 opt.fit(X_train, y_train)
 
