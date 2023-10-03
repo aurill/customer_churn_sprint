@@ -5,7 +5,7 @@ Predict customer churn for Sprint, a major US telecommunications company. This M
 
 This repository contains a comprehensive machine learning project focused on predicting customer churn for Sprint, one of the largest telecom companies in the USA. Customer churn, or the rate customers leave a service provider, is a critical concern for businesses like Sprint. Predicting churn allows telecom companies to retain valuable customers and optimize their services proactively.
 
-In this project, we leverage historical customer data, including information about customer demographics, contract details, usage patterns, and churn status.
+In this project, we leverage historical customer data, including information about customer demographics, contract details, usage patterns, and churn status to predict Customer Churn at Sprint Technologies. 
 
 ## **Overview**
 
