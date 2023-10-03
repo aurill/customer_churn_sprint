@@ -132,6 +132,7 @@ print(f'Ridge Classifier roc auc Score : {roc_auc:.3f} %')
 
 _These scores indicate that the Machine learning algorithm performed well in predicting customer churn with high accuracy, recall, precision, and ROC AUC values._
 
+
 **Secondly**, in order to try capturing complex non-linear relationships within the data and for the purposes of cross-validation, LightGBM algorithm was also implemented. This algorithm was optimized using Bayesian Optimization to search for the best set of hyperparameters for the classifier using a brute-force search method. 
 
 ```python
