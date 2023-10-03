@@ -13,9 +13,9 @@ Customer churn is the percentage of customers who stopped using a company's prod
 
 We will discuss the machine-learning techniques and models that were used in the project below:
 
-- **Ridge Classifier with Grid Search**: Ridge classifiers are suitable for binary classification problems like churn prediction. They can handle features that may be correlated, which is common in customer data. By using Ridge Classifier, you account for potential correlations among customer attributes, helping to make accurate churn predictions.
+- **Ridge Classifier with Grid Search**: Ridge classifiers are suitable for binary classification problems like churn prediction. They can handle features that may be correlated, which is common in customer data. Ridge Classifier can account for potential correlations among customer attributes, helping to make accurate churn predictions.
 
-+ **LightGBM Classifier with Bayesian Optimization**: LightGBM is a gradient-boosting framework that excels in speed and efficiency, making it an excellent choice for handling large datasets, such as those encountered in telecom customer churn prediction. It's capable of handling categorical features efficiently and can capture complex relationships between features, making it well-suited for identifying subtle churn patterns. Its high accuracy and speed make LightGBM a valuable addition to the set of classifiers.
++ **LightGBM Classifier with Bayesian Optimization**: LightGBM is a gradient-boosting framework that excels in speed and efficiency, making it an excellent choice for handling large datasets, such as those encountered in telecom customer churn prediction. It's capable of handling categorical features efficiently and it can capture complex relationships between features, making it well-suited for identifying subtle churn patterns. Its high accuracy and speed make LightGBM a valuable addition to the set of classifiers.
 
 ## **Defining a Churn Event**.
 
